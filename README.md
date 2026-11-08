@@ -92,7 +92,7 @@ curl "localhost:8000/screen?tickers=AAPL,MSFT,JPM,XOM,KO,PFE"
 python desktop/dashboard.py
 ```
 
-Single-ticker analysis across five tabs — regression statistics, rolling betas,
+Single-ticker analysis across four tabs — regression statistics, rolling betas,
 return distribution by regime, raw data with CSV export — plus a cross-sectional
 screen tab that ranks a whole universe.
 
@@ -154,9 +154,10 @@ These are deliberate and worth stating plainly:
 - **yfinance is not execution-grade.** It is unofficial, delayed, and revises silently.
   `auto_adjust=True` also restates past prices after corporate actions, which is a
   look-ahead concern for any live use.
-- **Two estimators coexist.** `src/dapm` uses the paper's through-origin moment estimator;
-  the dashboard's own `linreg` is OLS with an intercept, used for its standard errors,
-  t-statistics, and R². Headline betas can differ slightly between the two.
+- **Two estimators coexist.** `src/dapm` and the API use the paper's through-origin
+  moment estimator. The dashboard's β⁺ and β⁻ use OLS with an intercept (`linreg`),
+  which it also uses for standard errors, t-statistics, and R². Its split betas can
+  therefore differ materially from the API's. The dashboard shows a note about this.
 - **This is a research tool, not a trading system.** The signal is daily-frequency with a
   monthly rebalance; it does not update intraday and there is no broker integration.
 
