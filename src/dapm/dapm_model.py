@@ -2,15 +2,13 @@ from __future__ import annotations
 from dataclasses import dataclass
 import numpy as np
 
-from .capm import capm_beta as _classical_beta  # unconditional beta, for best_beta
-
 
 @dataclass
 class DAPMResult:
     beta_plus: float
     beta_minus: float
-    best_beta: float        # unconditional beta, eq. 16 — the pricing-error minimizer
-    asymmetry_ratio: float  # beta_plus / beta_minus
+    best_beta: float
+    asymmetry_ratio: float
     n_up: int
     n_down: int
 
@@ -27,7 +25,7 @@ def upper_lower_betas(xi: np.ndarray, xm: np.ndarray, min_obs: int = 5) -> DAPMR
     xm = np.asarray(xm, dtype=float)
 
     up_mask = xm > 0
-    down_mask = ~up_mask  # xm <= 0, partitioned at the risk-free rate
+    down_mask = ~up_mask
 
     n_up, n_down = int(up_mask.sum()), int(down_mask.sum())
     if n_up < min_obs or n_down < min_obs:

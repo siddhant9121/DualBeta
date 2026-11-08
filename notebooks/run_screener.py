@@ -5,19 +5,12 @@ from dapm.data import load_market_data
 from dapm.backtest import rolling_dapm_betas, asymmetry_screen
 
 tickers = [
-    # Tech
     "AAPL", "MSFT", "GOOGL", "AMZN", "META", "NVDA", "ADBE", "CRM",
-    # Finance
     "JPM", "BAC", "GS", "MS", "V", "MA",
-    # Healthcare
     "JNJ", "UNH", "PFE", "MRK",
-    # Energy
     "XOM", "CVX",
-    # Consumer
     "KO", "PEP", "WMT", "MCD", "NKE",
-    # Industrials
     "BA", "CAT", "GE",
-    # Telecom / Media
     "DIS", "NFLX", "VZ",
 ]
 assets, market, rf = load_market_data(tickers, start="2021-01-01", end="2024-01-01")
@@ -31,7 +24,7 @@ print(latest_screen[["asset", "beta_plus", "beta_minus", "asymmetry_ratio"]].to_
 from dapm.backtest import backtest_asymmetry_portfolio
 
 result = backtest_asymmetry_portfolio(assets, panel, top_q=0.3, bottom_q=0.3)
-print(f"\nBacktest results:")
+print("\nBacktest results:")
 print(f"Annualized return: {result.annualized_return:.2%}")
 print(f"Annualized volatility: {result.annualized_vol:.2%}")
 print(f"Sharpe ratio: {result.sharpe:.3f}")

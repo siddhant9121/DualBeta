@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Node — the React scaffold was removed; this covers any leftover install
+node_modules/
+frontend/
+
+# OS
+.DS_Store
+
+# Exports from the dashboard's CSV download
+*_daily_returns.csv
+
+# Personal study notes
+notes.pdf

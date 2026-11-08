@@ -8,7 +8,7 @@ class CMOptionPrices:
     p_i: float
     c_m: float
     p_m: float
-    parity_gap: float  # c_i - p_i, should be ~0 under no-arbitrage
+    parity_gap: float
 
 
 def price_cross_market_options(xi: np.ndarray, xm: np.ndarray, r0: float = 1.0) -> CMOptionPrices:

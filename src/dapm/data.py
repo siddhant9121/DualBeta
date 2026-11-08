@@ -37,7 +37,7 @@ def load_market_data(tickers, benchmark="^GSPC", start="2019-01-01", end=None,
     import yfinance as yf
     all_tickers = tickers + [benchmark, riskfree_ticker]
     raw = yf.download(all_tickers, start=start, end=end, auto_adjust=True)["Close"]
-    rets = raw.pct_change().dropna(how="all")
+    rets = raw.pct_change(fill_method=None).dropna(how="all")
     irx_level = raw[riskfree_ticker].reindex(rets.index).ffill()
     riskfree_daily = (irx_level / 100.0) / 252.0
     return rets[tickers].dropna(), rets[benchmark].dropna(), riskfree_daily.dropna()
